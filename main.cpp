@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cctype>
-#include <iomainp>
+#include <iomanip>
 
 using namespace std;
 
@@ -23,7 +23,7 @@ public:
     int retAccNo() const;
     int retDeposit() const;
     char retType() const;
-}
+};
 
 // Public methods for account class
 
@@ -43,4 +43,69 @@ void account::createAccount() {
     cin >> deposit;
 
     cout << "Account created";
+}
+
+// Function Declaration
+void write_account();
+
+void intro();
+
+int main() {
+    char ch;
+    int num;
+    intro();
+
+    do {
+        system("clear");
+        cout << "\n\n\n\tMAIN MENU";
+        cout << "\n\n\t01. NEW ACCOUNT";
+        // cout << "\n\n\t02. DEPOSIT AMOUNT";
+        // cout << "\n\n\t03. WITHDRAW AMOUNT";
+        // cout << "\n\n\t04. BALANCE ENQUIRY";
+        // cout << "\n\n\t05. ALL ACCOUNT HOLDER LIST";
+        // cout << "\n\n\t06. CLOSE AN ACCOUNT";
+        // cout << "\n\n\t07. MODIFY AN ACCOUNT";
+        cout << "\n\n\t08. EXIT";
+        cout << "\n\n\tSelect Your Option (1-8) ";
+
+        cin >> ch;
+
+        system("clear");
+
+        switch (ch) {
+            case '1':
+                write_account();
+                break;
+            case '8':
+                cout << "\n\n\tThanks for using bank managemnt system";
+                break;
+            default:
+                cout << "\a";
+        }
+        cin.ignore();
+        cin.get();
+    } while (ch!= '8');
+
+    return 0;
+}
+
+// FUNCTIONS
+
+//Intro
+void intro() {
+    cout << "\n\n\n\t BANK";
+    cout << "\n\n\tMANAGEMENT";
+    cout << "\n\n\t  SYSTEM";
+    cout << "\n\n\n\nMADE BY : Tarcode";
+    cin.get();
+}
+
+// Write Account
+void write_account() {
+    account ac;
+    ofstream outFile;
+    outFile.open("account.dat", ios::binary|ios::app);
+    ac.createAccount();
+    outFile.write(reinterpret_cast<char *> (&ac), sizeof(account));
+    outFile.close();
 }
