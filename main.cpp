@@ -240,3 +240,22 @@ void deleteAccount(int n) {
     cout << "\n\n\tRecord Deleted.";
 
 }
+
+void displayAll() {
+    account ac;
+    ifstream inFile;
+    inFile.open("account.dat", ios::binary);
+    if(!inFile) {
+        cout << "File could not be opened!! Press any key..";
+        return;
+    }
+    cout << "\n\n\tACCOUNT HOLDER LIST\n\n";
+    cout<<"####################################################\n";
+	cout<<"A/c no.      NAME           Type  Balance\n";
+    cout<<"####################################################\n";
+    
+    while(inFile.read(reinterpret_cast<char *> (&ac), sizeof(account))) {
+		ac.report();
+	}
+	inFile.close();
+}
