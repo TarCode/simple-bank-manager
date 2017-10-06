@@ -92,7 +92,10 @@ char account::retType() const {
 // Function Declarations
 void write_account();
 void displaySpecific(int);
-
+void modifyAccount(int);
+void deleteAccount(int);
+void displayAll();
+void depositWithdraw(int,int);
 void intro();
 
 int main() {
@@ -179,4 +182,37 @@ void displaySpecific(int n) {
         cout << "\nAccount number does not exist";
     }
 
+}
+
+void modifyAccount(int n) {
+    bool found = false;
+    account ac;
+    fstream File;
+    File.open("account.dat", ios::binary|ios::in|ios::out);
+
+    if (!File) {
+        cout << "File could not be opened!! Press any key...";
+        return;
+    }
+
+    while (!File.eof() && found ==false) {
+        File.read(reinterpret_cast<char *> (&ac), sizeof(account));
+
+        if(ac.retAccNo() == n) {
+            ac.showAccount();
+            cout << "\n\nEnter the new Details of the Account"<< endl;
+            ac.modify();
+
+            int pos = (-1) *static_cast<int>(sizeof(account));
+            File.seekp(pos, ios::cur);
+
+            File.write(reinterpret_cast<char *> (&ac), sizeof(account));
+            cout << "\n\n\t Record Updated."
+            found=true;
+        }
+    }
+    File.close();
+    if(found == false) {
+        cout << "\n\nRecord not found. ";
+    }
 }
