@@ -93,10 +93,8 @@ int main() {
 
 //Intro
 void intro() {
-    cout << "\n\n\n\t BANK";
-    cout << "\n\n\tMANAGEMENT";
-    cout << "\n\n\t  SYSTEM";
-    cout << "\n\n\n\nMADE BY : Tarcode";
+    cout << "BANK MANAGER";
+    cout << "\n\nMADE BY : Tarcode";
     cin.get();
 }
 
