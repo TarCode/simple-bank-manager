@@ -24,3 +24,23 @@ public:
     int retDeposit() const;
     char retType() const;
 }
+
+// Public methods for account class
+
+void account::createAccount() {
+    cout << "\n\nEnter Account Number: ";
+    cin >> accNo;
+    
+    cout << "\n\nEnter account holder name: ";
+    cin.ignore();
+    cin.getline(name, 50);
+
+    cout << "Enter the Account type (C/S): ";
+    cin >> type;
+    type=toupper(type);
+
+    cout << "\nEnter the intial amount (>=500  for saving and >= 1000 for current) : ";
+    cin >> deposit;
+
+    cout << "Account created";
+}
