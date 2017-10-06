@@ -54,7 +54,7 @@ void account::showAccount() const {
 }
 
 void account::modify() {
-    cout << "\Account No: " << accNo;
+    cout << "Account No: " << accNo;
     cout << "\nModify Account Holder Name: ";
     cin.ignore();
     cin.getline(name, 50);
@@ -207,7 +207,7 @@ void modifyAccount(int n) {
             File.seekp(pos, ios::cur);
 
             File.write(reinterpret_cast<char *> (&ac), sizeof(account));
-            cout << "\n\n\t Record Updated."
+            cout << "\n\n\t Record Updated.";
             found=true;
         }
     }
@@ -215,4 +215,28 @@ void modifyAccount(int n) {
     if(found == false) {
         cout << "\n\nRecord not found. ";
     }
+}
+
+void deleteAccount(int n) {
+    account ac;
+    ifstream inFile;
+    ofstream outFile;
+    inFile.open("account.dat", ios::binary);
+    if (!inFile) {
+        cout << "File could not be opened!! Press any key...";
+        return;
+    }
+    outFile.open("Temp.dat", ios::binary);
+    inFile.seekg(0, ios::beg);
+    while(inFile.read(reinterpret_cast<char *> (&ac), sizeof(account))) {
+        if (ac.retAccNo() != n) {
+            outFile.write(reinterpret_cast<char *> (&ac), sizeof(account));
+        }
+    }
+    inFile.close();
+    outFile.close();
+    remove("account.dat");
+    rename("Temp.dat", "account.dat");
+    cout << "\n\n\tRecord Deleted.";
+
 }
