@@ -107,12 +107,12 @@ int main() {
         system("clear");
         cout << "\n\n\n\tMAIN MENU";
         cout << "\n\n\t01. NEW ACCOUNT";
-        // cout << "\n\n\t02. DEPOSIT AMOUNT";
-        // cout << "\n\n\t03. WITHDRAW AMOUNT";
-        // cout << "\n\n\t04. BALANCE ENQUIRY";
-        // cout << "\n\n\t05. ALL ACCOUNT HOLDER LIST";
-        // cout << "\n\n\t06. CLOSE AN ACCOUNT";
-        // cout << "\n\n\t07. MODIFY AN ACCOUNT";
+        cout << "\n\n\t02. DEPOSIT AMOUNT";
+        cout << "\n\n\t03. WITHDRAW AMOUNT";
+        cout << "\n\n\t04. BALANCE ENQUIRY";
+        cout << "\n\n\t05. ALL ACCOUNT HOLDER LIST";
+        cout << "\n\n\t06. CLOSE AN ACCOUNT";
+        cout << "\n\n\t07. MODIFY AN ACCOUNT";
         cout << "\n\n\t08. EXIT";
         cout << "\n\n\tSelect Your Option (1-8) ";
 
@@ -123,6 +123,34 @@ int main() {
         switch (ch) {
             case '1':
                 write_account();
+                break;
+            case '2':
+                cout << "\n\n\tEnter the Account Number: ";
+                cin >> num;
+                depositWithdraw(num, 1);
+                break;
+            case '3':
+                cout << "\n\n\tEnter the Account Number: ";
+                cin >> num;
+                depositWithdraw(num, 2);
+                break;
+            case '4':
+                cout << "\n\n\tEnter the Account Number: ";
+                cin >> num;
+                displaySpecific(num);
+                break;
+            case '5':
+                displayAll();
+                break;
+            case '6':
+                cout << "\n\n\tEnter the Account Number: ";
+                cin >> num;
+                deleteAccount(num);
+                break;
+            case '7':
+                cout << "\n\n\tEnter the Account Number: ";
+                cin >> num;
+                modifyAccount(num);
                 break;
             case '8':
                 cout << "\n\n\tThanks for using bank managemnt system";
@@ -267,7 +295,7 @@ void depositWithdraw(int n, int option) {
     fstream File;
 
     File.open("account.dat", ios::binary|ios::in|ios::out);
-    
+
     if (!File) {
         cout << "File could not be opened!! Press any key";
         return;
