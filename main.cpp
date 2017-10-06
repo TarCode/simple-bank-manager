@@ -53,8 +53,40 @@ void account::showAccount() const {
     cout << "\nBalance Amount: " << deposit;
 }
 
+void account::modify() {
+    cout << "\Account No: " << accNo;
+    cout << "\nModify Account Holder Name: ";
+    cin.ignore();
+    cin.getline(name, 50);
+    cout << "\nModify Account Type: ";
+    cin >> type;
+    type = toupper(type);
+    cout << "\nModify Account Balance: ";
+    cin >> deposit;
+}
+
+void account::dep(int x) {
+    deposit += x;
+}
+
+void account::draw(int x) {
+    deposit -= x;
+}
+
+void account::report() const {
+    cout << accNo << setw(10) << " " << name << setw(10) << " " << type << setw(6) << deposit << endl;
+}
+
 int account::retAccNo() const {
     return accNo;
+}
+
+int account::retDeposit() const {
+    return deposit;
+}
+
+char account::retType() const {
+    return type;
 }
 
 // Function Declarations
