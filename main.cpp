@@ -45,8 +45,21 @@ void account::createAccount() {
     cout << "Account created";
 }
 
-// Function Declaration
+void account::showAccount() const {
+    cout << "\nAccount No: " << accNo;
+    cout << "\nAccount Holder: ";
+    cout << name;
+    cout << "\nAccount Type: " << type;
+    cout << "\nBalance Amount: " << deposit;
+}
+
+int account::retAccNo() const {
+    return accNo;
+}
+
+// Function Declarations
 void write_account();
+void displaySpecific(int);
 
 void intro();
 
@@ -106,4 +119,32 @@ void write_account() {
     ac.createAccount();
     outFile.write(reinterpret_cast<char *> (&ac), sizeof(account));
     outFile.close();
+}
+
+// Display specific account
+void displaySpecific(int n) {
+    account ac;
+    bool flag = false;
+    ifstream inFile;
+    inFile.open("account.dat", ios::binary);
+
+    if(!inFile) {
+        cout << "File could not be opened!! Press any key...";
+        return;
+    }
+
+    cout << "\nBALANCE DETAILS\n";
+
+    while(inFile.read(reinterpret_cast<char *> (&ac), sizeof(account))) {
+        if(ac.retAccNo() == n) {
+            ac.showAccount();
+            flag=true;
+        }
+    }
+    inFile.close();
+
+    if (flag == false) {
+        cout << "\nAccount number does not exist";
+    }
+
 }
